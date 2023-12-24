@@ -18,7 +18,7 @@ class ServiceResource extends JsonResource
             'ID: ' => $this->resource->id,
             'Naziv usluge ' => $this->resource->naziv,
             'Duzina izrade usluge: '=> $this->resource->duzinaIzrade,
-            'Kategorija usluge: '=>new ServiceCategoryResource($this->resource->service_category),
+            'Kategorija usluge: '=>new ServiceCategoryResource($this->resource->serviceCategory),
         ];
     }
 }

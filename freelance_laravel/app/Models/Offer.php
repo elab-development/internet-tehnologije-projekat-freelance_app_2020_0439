@@ -28,4 +28,9 @@ class Offer extends Model
     {
         return $this->belongsTo(User::class, 'sold_by_user_id');
     }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

@@ -9,6 +9,8 @@ class ServiceCategory extends Model
 {
     use HasFactory;
 
+    protected $table = 'service_categories';
+
     protected $fillable = [
         'naziv', 
     ];

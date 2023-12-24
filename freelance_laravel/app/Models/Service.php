@@ -11,7 +11,6 @@ class Service extends Model
 
     protected $fillable = [
         'naziv', 
-        'cena', 
         'duzinaIzrade', 
         'service_category_id', 
     ];

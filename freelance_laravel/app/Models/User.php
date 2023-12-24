@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'isAdmin',
     ];
 
     /**
@@ -39,7 +40,16 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function offers_taken()
+    {
+        return $this->hasMany(Service::class, 'taken_by_user_id');
+    }
+
+    public function offers_sold()
+    {
+        return $this->hasMany(Service::class, 'sold_by_user_id');
+    }
 }

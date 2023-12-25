@@ -62,6 +62,7 @@ class AuthController extends Controller
 
         $odgovor = [
             'Poruka' => 'Uspesno ste se ulogovali.',
+            'User: ' => $user,
             'Vas token za rad: ' => $token,
         ];
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +35,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('services/{id}', [ServiceController::class, 'destroy']);  
 
     //admin i autentifikovan korisnik
-    
+    Route::post('/offers', [OfferController::class, 'store']);
+    Route::put('/offers/{id}', [OfferController::class, 'update']);
+    Route::delete('/offers/{id}', [OfferController::class, 'destroy']);
+
     Route::post('logout', [AuthController::class, 'logout']);
 
 });

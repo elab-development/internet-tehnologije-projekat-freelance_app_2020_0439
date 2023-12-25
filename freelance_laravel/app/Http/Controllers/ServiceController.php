@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ServicesExport;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -10,6 +11,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -191,4 +194,11 @@ class ServiceController extends Controller
            'usluge' => ServiceResource::collection($paginatedSearchResults)
        ]);
    }
+
+
+   //export CSV
+   public function exportToCSV(){
+    return Excel::download(new ServicesExport, 'services-csv.csv');
+    }
+
 }

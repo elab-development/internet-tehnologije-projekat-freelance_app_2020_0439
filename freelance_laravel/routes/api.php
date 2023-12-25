@@ -29,7 +29,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('resetPassword',[AuthController::class,'resetPassword']);
 
 //export u csv
-Route::get('/exportCSV', [ServiceController::class, 'exportToCSV']);
+Route::get('/services/exportCSV', [ServiceController::class, 'exportToCSV']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

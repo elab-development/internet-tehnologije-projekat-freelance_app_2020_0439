@@ -28,6 +28,10 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('resetPassword',[AuthController::class,'resetPassword']);
 
+//export u csv
+Route::get('/exportCSV', [ServiceController::class, 'exportToCSV']);
+
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //samo admin
     Route::post('services', [ServiceController::class, 'store']);

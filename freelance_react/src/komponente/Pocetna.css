@@ -1,0 +1,82 @@
+.home-stranica {
+    height: 800px;
+    background-color: #333;
+    padding: 50px;
+}
+
+.home {
+    padding: 10px;
+    text-align: center;
+    background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+}
+
+.service-images-container {
+    display: flexbox;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.service-image {
+        width: 180px; /* Adjust the width as needed */
+        height: 180px; /* Adjust the height as needed */
+        object-fit: cover; /* This property ensures that the image retains its aspect ratio */
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.home h1 {
+    color: black; 
+    font-weight: bolder;
+}
+
+.home p {
+    color: black; 
+    font-weight: bolder;
+}
+
+.readmore {
+    text-decoration: underline;
+}
+
+.readmore:hover {
+    color: blue;
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+    padding: 100px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 40px;
+    color: #333;
+    font-weight: bolder;
+}
+
+.close:hover {
+    color: white;
+    font-weight: bolder;
+}

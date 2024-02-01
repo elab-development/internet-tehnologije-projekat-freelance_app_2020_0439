@@ -1,0 +1,65 @@
+.cela-stranica {
+    background-color: #333;
+    padding: 50px;
+}
+
+.usluge-stranica {
+    max-width: 900px;
+    height: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .pretraga {
+    margin-bottom: 20px;
+  }
+
+  input[type="text"],
+  select,
+  button {
+    margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #333;
+    color: rgb(255, 219, 47);
+    font-size: medium;
+    font-weight: bolder;
+  }
+
+  input[type="text"] {
+    width: 200px;
+  }
+
+  select {
+    width: 150px;
+  }
+
+  button {
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    background-color: #333;
+    color: rgb(255, 219, 47);
+    font-size: medium;
+    font-weight: bolder;
+
+  }
+
+  .usluge-lista {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .usluge-lista li {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }

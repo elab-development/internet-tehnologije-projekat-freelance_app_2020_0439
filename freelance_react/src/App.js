@@ -5,7 +5,7 @@ import Footer from './komponente/Footer';
 import Pocetna from './komponente/Pocetna';
 import ONama from './komponente/ONama';
 import Usluge from './komponente/Usluge';
-
+import KategorijeUsluga from './komponente/KategorijeUsluga';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
             <Route path="/" element={<Pocetna/>} />
             <Route path="/o-nama" element={<ONama/>} />
             <Route path="/usluge" element={<Usluge/>} />
+            <Route path="/kategorije" element={<KategorijeUsluga/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>

@@ -35,7 +35,7 @@ const Pocetna = () => {
                     interesima i ekspertizama.
                 </p>
                 <p className={`readmore ${readMoreClicked ? 'clicked' : ''}`} onClick={handleReadMoreClick}> 
-                    ...PROCITAJ VISE...
+                    ...PROČITAJ VIŠE...
                      </p>
 
                 {showModal && (
@@ -43,7 +43,7 @@ const Pocetna = () => {
                         <div className="modal-content">
                             <span className="close" onClick={toggleModal}>&times;</span>
                             <img className='logo'  src="https://i.ibb.co/QrSXky7/image-Photo-Room-png-Photo-Room.png" alt="logo" border="0"/>
-                            <p>
+                            <p className='tekst'>
                             Freelance aplikacija pruža korisnicima platformu
                              za jednostavno povezivanje i saradnju na raznolikim
                               projektima. Omogućava slobodu izbora poslova i 

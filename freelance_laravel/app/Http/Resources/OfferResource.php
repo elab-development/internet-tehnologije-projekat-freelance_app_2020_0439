@@ -15,13 +15,13 @@ class OfferResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id: ' => $this->resource->id,
-            'Datum zakljucenja ponude: '=> $this->resource->datumZakljucenja,
-            'Cena zakljucene ponude u EUR: '=> $this->resource->cenaPonude,
-            'Status naplate: '=> $this->resource->statusNaplate,
-            'Koja usluga je u pitanju: '=> new ServiceResource($this->resource->service),
-            'Ko je uzeo uslugu: '=>  new UserResource($this->resource->taken_by_user),
-            'Ko je prodao uslugu: '=>  new UserResource($this->resource->sold_by_user),
+            'id' => $this->resource->id,
+            'datumZakljucenja'=> $this->resource->datumZakljucenja,
+            'cenaPonude'=> $this->resource->cenaPonude,
+            'statusNaplate'=> $this->resource->statusNaplate,
+            'service_id'=> new ServiceResource($this->resource->service),
+            'taken_by_user_id'=>  new UserResource($this->resource->taken_by_user),
+            'sold_by_user_id'=>  new UserResource($this->resource->sold_by_user),
         ];
     }
 }

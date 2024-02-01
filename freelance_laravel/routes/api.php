@@ -24,6 +24,9 @@ Route::resource('service-categories', ServiceCategoryController::class);
 //vraca sve services koje su datog naziva kategorije
 Route::get('services/category', [ServiceController::class, 'getServicesByCategoryName']); 
 
+
+Route::get('services', [ServiceController::class, 'index']);
+
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('resetPassword',[AuthController::class,'resetPassword']);

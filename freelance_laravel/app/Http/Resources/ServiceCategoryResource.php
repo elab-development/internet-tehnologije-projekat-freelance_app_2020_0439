@@ -15,8 +15,8 @@ class ServiceCategoryResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'ID: ' => $this->resource->id,
-            'Naziv kategorije usluge: ' => $this->resource->naziv,
+            'id' => $this->resource->id,
+            'naziv' => $this->resource->naziv,
         ];
     }
 }

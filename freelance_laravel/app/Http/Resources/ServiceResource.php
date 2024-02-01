@@ -15,10 +15,10 @@ class ServiceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'ID: ' => $this->resource->id,
-            'Naziv usluge ' => $this->resource->naziv,
-            'Duzina izrade usluge: '=> $this->resource->duzinaIzrade,
-            'Kategorija usluge: '=>new ServiceCategoryResource($this->resource->serviceCategory),
+            'id' => $this->resource->id,
+            'naziv' => $this->resource->naziv,
+            'duzinaIzrade'=> $this->resource->duzinaIzrade,
+            'service_category_id'=>new ServiceCategoryResource($this->resource->serviceCategory),
         ];
     }
 }

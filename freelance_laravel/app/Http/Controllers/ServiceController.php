@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
-
+  public function index()
+  {
+      $services = Service::all();
+      return ServiceResource::collection($services);
+  }
 
 
     public function store(Request $request)

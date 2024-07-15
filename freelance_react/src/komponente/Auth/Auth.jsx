@@ -8,6 +8,7 @@ const Auth = () => {
     const [password, setPassword] = useState('password');
     const [message, setMessage] = useState('');
     const [isLogin, setIsLogin] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -36,6 +37,18 @@ const Auth = () => {
             setMessage(poruka);
         } catch (error) {
             setMessage('Neuspesan login: ' + error.response.data);
+        }
+    };
+
+    const suggestPassword = async () => {
+        try {
+            const response = await axios.get('https://api.api-ninjas.com/v1/passwordgenerator', {
+                headers: { 'X-Api-Key': 'jcWCqSr114CjwUWVpd58L3vDj1sKV6bcdHWVk8pS' }
+            });
+            const suggestedPassword = response.data.random_password;
+            setPassword(suggestedPassword);
+        } catch (error) {
+            console.error('Error fetching password suggestion:', error);
         }
     };
 
@@ -69,12 +82,20 @@ const Auth = () => {
                     <div>
                         <label htmlFor="password">Lozinka:</label>
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
+                        <button type="button" onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? 'Sakrij Lozinku' : 'Prikaži Lozinku'}
+                        </button>
+                        {!isLogin && (
+                            <>
+                                <button type="button" onClick={suggestPassword}>Sugerisi Lozinku</button>
+                            </>
+                        )}
                     </div>
                     <button type="submit">{isLogin ? 'Prijavi se' : 'Registruj se'}</button>
                 </form>

@@ -46,10 +46,7 @@ class ServiceController extends Controller
 
             return response()->json($errors);
         }
-
-        if (!$isAdmin) {
-        return response()->json(['greska:' => 'Ovo moze samo admin da radi'], 403);
-        }
+ 
 
         $service = new Service();
         $service->naziv = $request->naziv;
@@ -86,11 +83,7 @@ class ServiceController extends Controller
             }
     
             return response()->json($errors);
-        }
-
-        if (!$isAdmin) {
-          return response()->json(['greska:' => 'Ovo moze samo admin da radi'], 403);
-        }
+        } 
 
         $service = Service::find($id);
         if(!$service){
@@ -120,10 +113,7 @@ class ServiceController extends Controller
             $errors = $validator->errors();
             return response()->json($errors);
         }
-
-        if (!$isAdmin) {
-          return response()->json(['greska:' => 'Ovo moze samo admin da radi'], 403);
-        }
+ 
 
         $service = Service::find($id);
         if(!$service){
@@ -148,13 +138,7 @@ class ServiceController extends Controller
              'poruka'=>'Usluga sa ovim id-em ne postoji.'
 
           ],404);
-        }
-
-        $isAdmin = Auth::user()->isAdmin;
-
-        if (!$isAdmin) {
-        return response()->json(['greska:' => 'Ovo moze samo admin da radi'], 403);
-        }
+        } 
 
         $service->delete();
         return response()->json([

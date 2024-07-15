@@ -7,6 +7,7 @@ import ONama from './komponente/ONama';
 import Usluge from './komponente/Usluge';
 import KategorijeUsluga from './komponente/KategorijeUsluga';
 import Auth from './komponente/Auth/Auth';
+import ServicesDashboard from './komponente/ServicesDashboard/ServicesDashboard';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
 
 
             <Route path="/auth" element={<Auth/>} />
+            <Route path="/servicesdashboard" element={<ServicesDashboard/>} />
+
 
         </Routes>
         <Footer/>

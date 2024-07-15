@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Pocetna.css';
 
 const Pocetna = () => {
     const [showModal, setShowModal] = useState(false);
     const [readMoreClicked, setReadMoreClicked] = useState(false);
+    const [images, setImages] = useState([]);
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -14,17 +16,33 @@ const Pocetna = () => {
         toggleModal();
     };
 
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                const response = await axios.get('https://api.unsplash.com/search/photos', {
+                    params: { query: 'office work', per_page: 5 },
+                    headers: {
+                        Authorization: 'Client-ID YvBxTVU_ggpMkTDjaZOyGnMh79OzyJlZUiC1D1gu9oE'  
+                    }
+                });
+                setImages(response.data.results);
+            } catch (error) {
+                console.error('Error fetching images:', error);
+            }
+        };
+
+        fetchImages();
+    }, []);
+
     return (
         <div className='home-stranica'>
             <div className="home">
                 <h1>Dobrodošli na sajt za freelance usluge!</h1>
                 <p>Nadjite najbolju uslugu i resite vas problem sto pre!</p>
                 <div className="service-images-container">
-                     <img src={require('../slike/slika1.jpg')} alt="Image 1" className="service-image"/>
-                     <img src={require('../slike/slika2.jpg')} alt="Image 2" className="service-image"/>
-                     <img src={require('../slike/slika3.jpg')} alt="Image 3" className="service-image"/>
-                     <img src={require('../slike/slika4.jpg')} alt="Image 4" className="service-image"/>
-                     <img src={require('../slike/slika5.jpg')} alt="Image 5" className="service-image"/>
+                    {images.map((image) => (
+                        <img key={image.id} src={image.urls.small} alt={image.alt_description} className="service-image" />
+                    ))}
                 </div>
                 <p>
                     Freelance aplikacija pruža korisnicima 
@@ -36,7 +54,7 @@ const Pocetna = () => {
                 </p>
                 <p className={`readmore ${readMoreClicked ? 'clicked' : ''}`} onClick={handleReadMoreClick}> 
                     ...PROČITAJ VIŠE...
-                     </p>
+                </p>
 
                 {showModal && (
                     <div className="modal">
@@ -57,10 +75,9 @@ const Pocetna = () => {
                                      i uspeh u svetu freelance-inga.
                             </p>
 
-                            <img src='https://i.ibb.co/HPNKGSs/istockphoto-1398577959-612x612.jpg' alt="Image 6" className="service-image"/>
-                            <img src='https://thesweetbits.com/wp-content/uploads/2023/03/4Kvideo.jpg' alt="Image 7" className="service-image"/>
-                            <img src='https://www.shutterstock.com/shutterstock/videos/21274588/thumb/1.jpg?ip=x480' alt="Image 8" className="service-image"/>
-                            <img src='https://c4.wallpaperflare.com/wallpaper/126/971/651/fitness-gym-coach-training-wallpaper-preview.jpg' alt="Image 9" className="service-image"/>
+                            {images.slice(1).map((image) => (
+                                <img key={image.id} src={image.urls.small} alt={image.alt_description} className="service-image" />
+                            ))}
                         
                         </div>
                     </div>
@@ -71,4 +88,3 @@ const Pocetna = () => {
 };
 
 export default Pocetna;
-

@@ -6,6 +6,7 @@ import Pocetna from './komponente/Pocetna';
 import ONama from './komponente/ONama';
 import Usluge from './komponente/Usluge';
 import KategorijeUsluga from './komponente/KategorijeUsluga';
+import Auth from './komponente/Auth/Auth';
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
             <Route path="/o-nama" element={<ONama/>} />
             <Route path="/usluge" element={<Usluge/>} />
             <Route path="/kategorije" element={<KategorijeUsluga/>} />
+
+
+            <Route path="/auth" element={<Auth/>} />
+
         </Routes>
         <Footer/>
       </BrowserRouter>

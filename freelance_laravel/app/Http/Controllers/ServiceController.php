@@ -188,5 +188,17 @@ class ServiceController extends Controller
    public function exportToCSV(){
     return Excel::download(new ServicesExport, 'services-csv.csv');
     }
+    public function getOffersCountForServices()
+    {
+        $services = Service::withCount('offers')->get();
+        $servicesWithOffersCount = $services->map(function ($service) {
+            return [
+                'id' => $service->id,
+                'naziv' => $service->naziv,
+                'offers_count' => $service->offers_count,
+            ];
+        });
 
+        return response()->json($servicesWithOffersCount);
+    }
 }

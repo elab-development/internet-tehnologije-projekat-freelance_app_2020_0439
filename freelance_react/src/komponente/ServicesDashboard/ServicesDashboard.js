@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 import './ServicesDashboard.css';
 import useUsluge from '../../kuke/useUsluge';
 import useKategorije from '../../kuke/useKategorije';
+
+// Registracija potrebnih modula
+Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ServicesDashboard = () => {
   const { usluge, loading: loadingUsluge, error: errorUsluge, setUsluge } = useUsluge('http://127.0.0.1:8000/api/services');
@@ -11,8 +16,26 @@ const ServicesDashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentService, setCurrentService] = useState(null);
   const [newService, setNewService] = useState({ naziv: '', duzinaIzrade: '', service_category_id: '' });
+  const [offersCountData, setOffersCountData] = useState([]);
 
   const token = sessionStorage.getItem('token');
+
+  useEffect(() => {
+    const fetchOffersCount = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/offers-count', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setOffersCountData(response.data);
+      } catch (error) {
+        console.error('Error fetching offers count:', error);
+      }
+    };
+
+    fetchOffersCount();
+  }, [token]);
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -62,25 +85,25 @@ const ServicesDashboard = () => {
           Authorization: `Bearer ${token}`
         }
       });
-     window.reload();
+      setUsluge(usluge.filter(service => service.id !== id));
     } catch (error) {
       console.error('Error deleting service:', error);
     }
   };
- 
-    const fetchUsluge = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/services', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setUsluge(response.data.data);
-      } catch (error) {
-        console.error('Error fetching services:', error);
-      }
+
+  const getChartData = () => {
+    const sortedData = [...offersCountData].sort((a, b) => b.offers_count - a.offers_count);
+    return {
+      labels: sortedData.map(service => service.naziv),
+      datasets: [{
+        label: 'Number of Offers',
+        data: sortedData.map(service => service.offers_count),
+        backgroundColor: 'rgba(255, 219, 47, 0.6)', // Žuta boja
+        borderColor: 'rgba(255, 219, 47, 1)',
+        borderWidth: 1
+      }]
     };
- 
+  };
 
   if (loadingUsluge || loadingKategorije) return <div>Loading...</div>;
   if (errorUsluge || errorKategorije) return <div>Error loading data</div>;
@@ -89,6 +112,13 @@ const ServicesDashboard = () => {
     <div className='services-dashboard'>
       <h1>Services Dashboard</h1>
       <button onClick={() => setShowModal(true)}>Add New Service</button>
+      <div className='chart-container'>
+        <Bar data={getChartData()} options={{ 
+          responsive: true, 
+          maintainAspectRatio: false,
+          indexAxis: 'y', // Horizontalni grafik
+        }} />
+      </div>
       <table>
         <thead>
           <tr>

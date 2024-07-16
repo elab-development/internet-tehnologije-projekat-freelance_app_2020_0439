@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import './ServicesDashboard.css';
 import useUsluge from '../../kuke/useUsluge';
 import useKategorije from '../../kuke/useKategorije';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import 'jspdf-autotable';
 
 // Registracija potrebnih modula
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -12,11 +15,11 @@ Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 const ServicesDashboard = () => {
   const { usluge, loading: loadingUsluge, error: errorUsluge, setUsluge } = useUsluge('http://127.0.0.1:8000/api/services');
   const { kategorije, loading: loadingKategorije, error: errorKategorije } = useKategorije('http://127.0.0.1:8000/api/service-categories');
-
   const [showModal, setShowModal] = useState(false);
   const [currentService, setCurrentService] = useState(null);
   const [newService, setNewService] = useState({ naziv: '', duzinaIzrade: '', service_category_id: '' });
   const [offersCountData, setOffersCountData] = useState([]);
+  const reportRef = useRef();
 
   const token = sessionStorage.getItem('token');
 
@@ -104,44 +107,84 @@ const ServicesDashboard = () => {
       }]
     };
   };
+  const generatePDF = async () => {
+    const input = reportRef.current;
+    const canvas = await html2canvas(input, {
+      scale: 2,
+      useCORS: true
+    });
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  
+    const startY = pdfHeight + 10;
+  
+    const bodyData = usluge.map(service => [
+      service.naziv,
+      service.duzinaIzrade,
+      service.service_category_id.naziv
+    ]);
+  
+    pdf.autoTable({
+      startY: startY,
+      head: [['Naziv', 'Duzina Izrade', 'Kategorija']],
+      body: bodyData,
+      styles: { fillColor: [255, 219, 47] },
+      headStyles: { fillColor: [255, 219, 47] },
+      theme: 'plain',
+      tableWidth: 'wrap'
+    });
+  
+    pdf.save("report.pdf");
+  };
+  
 
   if (loadingUsluge || loadingKategorije) return <div>Loading...</div>;
   if (errorUsluge || errorKategorije) return <div>Error loading data</div>;
+
+ 
 
   return (
     <div className='services-dashboard'>
       <h1>Services Dashboard</h1>
       <button onClick={() => setShowModal(true)}>Add New Service</button>
-      <div className='chart-container'>
-        <Bar data={getChartData()} options={{ 
-          responsive: true, 
-          maintainAspectRatio: false,
-          indexAxis: 'y', // Horizontalni grafik
-        }} />
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Naziv</th>
-            <th>Duzina Izrade</th>
-            <th>Kategorija</th>
-            <th>Akcije</th>
-          </tr>
-        </thead>
-        <tbody>
-          {usluge.map((service) => (
-            <tr key={service.id}>
-              <td>{service.naziv}</td>
-              <td>{service.duzinaIzrade}</td>
-              <td>{service.service_category_id.naziv}</td>
-              <td>
-                <button onClick={() => handleEdit(service)}>Edit</button>
-                <button onClick={() => handleDelete(service.id)}>Delete</button>
-              </td>
+      <button onClick={generatePDF}>Generate PDF</button>
+      <div  >
+        <div  ref={reportRef} className='chart-container'>
+          <Bar data={getChartData()} options={{ 
+            responsive: true, 
+            maintainAspectRatio: false,
+            indexAxis: 'y', // Horizontalni grafik
+          }} />
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Naziv</th>
+              <th>Duzina Izrade</th>
+              <th>Kategorija</th>
+              <th>Akcije</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {usluge.map((service) => (
+              <tr key={service.id}>
+                <td>{service.naziv}</td>
+                <td>{service.duzinaIzrade}</td>
+                <td>{service.service_category_id.naziv}</td>
+                <td>
+                  <button onClick={() => handleEdit(service)}>Edit</button>
+                  <button onClick={() => handleDelete(service.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {showModal && (
         <div className="modal">
           <div className="modal-content">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './Auth.css'; 
 
 const Auth = () => {
@@ -9,6 +10,7 @@ const Auth = () => {
     const [message, setMessage] = useState('');
     const [isLogin, setIsLogin] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -19,8 +21,10 @@ const Auth = () => {
                 password,
             });
             setMessage(response.data.Poruka);
+            alert(response.data.Poruka);
         } catch (error) {
             setMessage('Neuspela registracija: ' + error.response.data);
+            alert('Neuspela registracija: ' + error.response.data);
         }
     };
 
@@ -35,8 +39,17 @@ const Auth = () => {
             sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('token', token);
             setMessage(poruka);
+            alert(poruka);
+
+            if (user.isAdmin === '1') {
+                navigate('/servicesdashboard');
+            } else {
+                navigate('/offer');
+            }
         } catch (error) {
-            setMessage('Neuspesan login: ' + error.response.data);
+            const errorMessage =  'Neuspesan login.';
+            setMessage(errorMessage);
+            alert(errorMessage);
         }
     };
 

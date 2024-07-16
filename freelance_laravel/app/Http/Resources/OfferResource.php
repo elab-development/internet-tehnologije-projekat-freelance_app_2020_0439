@@ -22,6 +22,7 @@ class OfferResource extends JsonResource
             'service_id'=> new ServiceResource($this->resource->service),
             'taken_by_user_id'=>  new UserResource($this->resource->taken_by_user),
             'sold_by_user_id'=>  new UserResource($this->resource->sold_by_user),
+            
         ];
     }
 }

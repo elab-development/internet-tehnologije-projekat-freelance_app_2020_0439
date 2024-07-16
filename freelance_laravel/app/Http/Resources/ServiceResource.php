@@ -19,6 +19,7 @@ class ServiceResource extends JsonResource
             'naziv' => $this->resource->naziv,
             'duzinaIzrade'=> $this->resource->duzinaIzrade,
             'service_category_id'=>new ServiceCategoryResource($this->resource->serviceCategory),
+            'offers'=>$this->offers
         ];
     }
 }

@@ -17,18 +17,19 @@ function App() {
       <BrowserRouter>
         <Navbar/>
         <Routes>
-            <Route path="/" element={<Pocetna/>} />
-            <Route path="/o-nama" element={<ONama/>} />
-            <Route path="/usluge" element={<Usluge/>} />
-            <Route path="/kategorije" element={<KategorijeUsluga/>} />
+          {/* neulogovani */}
+          <Route path="/" element={<Pocetna/>} />
+          <Route path="/o-nama" element={<ONama/>} />
+          <Route path="/kategorije" element={<KategorijeUsluga/>} />
+          <Route path="/auth" element={<Auth/>} />
 
+          {/* admin */}
+          <Route path="/servicesdashboard" element={<ServicesDashboard/>} />
 
-            <Route path="/auth" element={<Auth/>} />
-            <Route path="/offer" element={<OfferForm/>} />
-            <Route path="/servicesdashboard" element={<ServicesDashboard/>} />
-            <Route path="/userOffers" element={<UserOffers/>} />
-
-
+          {/* ulogovani, obican korisnik */}
+          <Route path="/userOffers" element={<UserOffers/>} />
+          <Route path="/offer" element={<OfferForm/>} />
+          <Route path="/usluge" element={<Usluge/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>

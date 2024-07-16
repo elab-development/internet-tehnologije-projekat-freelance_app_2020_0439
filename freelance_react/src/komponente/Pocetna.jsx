@@ -22,7 +22,7 @@ const Pocetna = () => {
                 const response = await axios.get('https://api.unsplash.com/search/photos', {
                     params: { query: 'office work', per_page: 5 },
                     headers: {
-                        Authorization: 'Client-ID YvBxTVU_ggpMkTDjaZOyGnMh79OzyJlZUiC1D1gu9oE'  
+                        Authorization: 'Client-ID 823wRXuwrsMgjhtbJcsF_wNO0FwE05gcPCSwrerl_fM'  
                     }
                 });
                 setImages(response.data.results);

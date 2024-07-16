@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::patch('services/{id}', [ServiceController::class, 'updateDuzinaIzrade']); 
     Route::delete('services/{id}', [ServiceController::class, 'destroy']);  
     Route::get('offers-count', [ServiceController::class, 'getOffersCountForServices']);
+    Route::get('ponudeKorisnika', [OfferController::class, 'getUserOffers']);
     //admin i autentifikovan korisnik
     Route::post('/offers', [OfferController::class, 'store']);
     Route::put('/offers/{id}', [OfferController::class, 'update']);

@@ -8,6 +8,8 @@ import Usluge from './komponente/Usluge';
 import KategorijeUsluga from './komponente/KategorijeUsluga';
 import Auth from './komponente/Auth/Auth';
 import ServicesDashboard from './komponente/ServicesDashboard/ServicesDashboard';
+import OfferForm from './komponente/Offer/OfferForm';
+import UserOffers from './komponente/Offer/UserOffers';
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
 
 
             <Route path="/auth" element={<Auth/>} />
+            <Route path="/offer" element={<OfferForm/>} />
             <Route path="/servicesdashboard" element={<ServicesDashboard/>} />
+            <Route path="/userOffers" element={<UserOffers/>} />
 
 
         </Routes>

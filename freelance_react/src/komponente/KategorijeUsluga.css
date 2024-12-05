@@ -1,0 +1,50 @@
+h3 {
+    color: black;
+    font-size: 25px;
+  }
+  
+  .kategorije-page {
+    background-color: #333;
+    width: 100%;
+    margin: 0 auto;
+    height: 1200px;
+    padding-top: 60px;
+    padding-bottom: 20px;
+  }
+  
+  .kategorije-lista {
+    list-style-type: none;
+    padding: 0;
+    justify-content: space-evenly; 
+  }
+  
+  .kategorije-lista li {
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .kategorije-lista li:hover {
+    background-color: whitesmoke;
+  }
+
+  .kanta {
+    max-width: 800px;
+    margin: 300px auto; /* Updated margin property */
+    margin-top: 100px;
+    margin-bottom: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+    background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+}
+
+
+.tekst {
+    text-align: justify;
+}

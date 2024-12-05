@@ -1,0 +1,73 @@
+.auth-container {
+    height: 800px;
+    background-color: #333;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-home {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(109.6deg, rgb(255, 219, 47) 11.2%, rgb(244, 253, 0) 100.2%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+    max-width: 400px;
+    width: 100%;
+}
+
+.auth-home h1 {
+    color: black; 
+    font-weight: bolder;
+}
+
+.auth-home form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-home form div {
+    margin-bottom: 15px;
+}
+
+.auth-home form label {
+    color: black; 
+    font-weight: bolder;
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.auth-home form input, .auth-home form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.auth-home form button {
+    padding: 10px;
+    background-color: #ffdb2f;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bolder;
+    cursor: pointer;
+    color: black;
+}
+
+.auth-home form button:hover {
+    background-color: #f4fd00;
+}
+
+.auth-home p {
+    color: black; 
+    font-weight: bolder;
+}
+
+.auth-toggle span {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
